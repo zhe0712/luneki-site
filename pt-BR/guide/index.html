@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Guia de uso — Luneki</title>
+<meta name="description" content="Da importação da primeira foto à exportação final — todos os recursos explicados.">
+<meta name="theme-color" content="#06070d">
+<meta property="og:title" content="Guia de uso — Luneki">
+<meta property="og:description" content="Da importação da primeira foto à exportação final — todos os recursos explicados.">
+<meta property="og:image" content="https://luneki.cutesf.com/assets/harbor-after.jpg">
+<link rel="icon" href="/icon.png"><link rel="apple-touch-icon" href="/icon.png">
+<link rel="alternate" hreflang="zh-Hant" href="/zh-Hant/guide/"><link rel="alternate" hreflang="en" href="/en/guide/"><link rel="alternate" hreflang="zh-Hans" href="/zh-Hans/guide/"><link rel="alternate" hreflang="ja" href="/ja/guide/"><link rel="alternate" hreflang="ko" href="/ko/guide/"><link rel="alternate" hreflang="es" href="/es/guide/"><link rel="alternate" hreflang="fr" href="/fr/guide/"><link rel="alternate" hreflang="de" href="/de/guide/"><link rel="alternate" hreflang="it" href="/it/guide/"><link rel="alternate" hreflang="pt-BR" href="/pt-BR/guide/"><link rel="alternate" hreflang="ru" href="/ru/guide/"><link rel="alternate" hreflang="tr" href="/tr/guide/"><link rel="alternate" hreflang="ar" href="/ar/guide/"><link rel="alternate" hreflang="hi" href="/hi/guide/"><link rel="alternate" hreflang="th" href="/th/guide/"><link rel="alternate" hreflang="vi" href="/vi/guide/"><link rel="alternate" hreflang="id" href="/id/guide/">
+<style>
+:root{--bg:#06070d;--bg2:#0c0e1a;--card:rgba(255,255,255,.045);--card2:rgba(255,255,255,.075);
+--line:rgba(255,255,255,.10);--fg:#eef0f8;--muted:#a3a7bd;--dim:#7c809a;
+--violet:#8b7bff;--rose:#ff6f9f;--amber:#ffb36b;--grad:linear-gradient(100deg,#8b7bff 0%,#ff6f9f 52%,#ffb36b 100%);
+--r:22px;--max:1160px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.7 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",
+"PingFang TC","PingFang SC","Hiragino Sans","Noto Sans","Noto Sans CJK TC",system-ui,sans-serif;overflow-x:hidden}
+a{color:inherit}img{max-width:100%;display:block}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+.sky{position:fixed;inset:0;z-index:-1;pointer-events:none;
+background:radial-gradient(1px 1px at 12% 18%,#fff8 50%,transparent 51%),radial-gradient(1px 1px at 72% 12%,#fff6 50%,transparent 51%),
+radial-gradient(1.5px 1.5px at 38% 34%,#fff7 50%,transparent 51%),radial-gradient(1px 1px at 88% 44%,#fff5 50%,transparent 51%),
+radial-gradient(1px 1px at 22% 66%,#fff5 50%,transparent 51%),radial-gradient(1.5px 1.5px at 58% 82%,#fff4 50%,transparent 51%),
+radial-gradient(1px 1px at 92% 78%,#fff5 50%,transparent 51%),radial-gradient(1px 1px at 6% 90%,#fff4 50%,transparent 51%),
+radial-gradient(60% 50% at 80% -10%,#3b2a8a55,transparent 70%),radial-gradient(50% 40% at 0% 10%,#7a2a5c40,transparent 70%),var(--bg)}
+/* header */
+header.top{position:sticky;top:0;z-index:20;backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);
+background:rgba(6,7,13,.72);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:18px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;letter-spacing:.01em;white-space:nowrap}
+.brand img{width:30px;height:30px;border-radius:8px}
+.nav{display:flex;gap:4px;margin-inline-start:auto;align-items:center}
+.nav a{text-decoration:none;color:var(--muted);font-size:.92rem;padding:8px 10px;border-radius:10px}
+.nav a:hover,.nav a[aria-current=page]{color:var(--fg);background:var(--card)}
+.lang{position:relative;display:flex;align-items:center;gap:6px;color:var(--muted)}
+.lang select{appearance:none;-webkit-appearance:none;background:var(--card);color:var(--fg);border:1px solid var(--line);
+border-radius:10px;font:inherit;font-size:.88rem;padding:7px 28px 7px 10px;cursor:pointer;max-width:160px}
+.lang::after{content:"";position:absolute;inset-inline-end:11px;top:50%;width:6px;height:6px;border:solid var(--muted);
+border-width:0 1.5px 1.5px 0;transform:translateY(-70%) rotate(45deg);pointer-events:none}
+.lang .ico{width:18px;height:18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;font-weight:600;border-radius:999px;
+padding:13px 22px;transition:transform .15s ease,box-shadow .2s ease;white-space:nowrap}
+.btn:hover{transform:translateY(-1px)}
+.btn.pri{background:#fff;color:#0b0c14;box-shadow:0 8px 30px -8px #ff6f9f88}
+.btn.ghost{border:1px solid var(--line);color:var(--fg);background:var(--card)}
+.btn .ico{width:19px;height:19px}
+.btn.sm{padding:8px 14px;font-size:.88rem}
+@media (max-width:900px){.nav a.opt{display:none}}
+@media (max-width:620px){.nav a{display:none}.bar .btn.sm{display:none}.lang select{max-width:118px}}
+/* hero */
+.hero{padding-block:88px 40px;text-align:center}
+.eyebrow{display:inline-block;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);
+border:1px solid #ffb36b44;background:#ffb36b10;padding:6px 14px;border-radius:999px}
+h1.big{font-size:clamp(2.3rem,6.2vw,4.6rem);line-height:1.08;letter-spacing:-.025em;margin:22px auto 0;max-width:13em;text-wrap:balance;white-space:pre-line}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:clamp(1.02rem,1.6vw,1.2rem);color:var(--muted);max-width:44rem;margin:22px auto 0}
+.ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:28px 0 0;padding:0;list-style:none}
+.chips li{font-size:.85rem;color:var(--muted);border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px}
+.hero-shot{margin:56px auto 0;max-width:1080px;border-radius:28px;padding:1px;background:linear-gradient(140deg,#8b7bff66,#ff6f9f44 50%,#ffb36b55)}
+.hero-shot .ba{border-radius:27px}
+/* sections */
+section.blk{padding-block:96px}
+.head{max-width:46rem;margin:0 auto 48px;text-align:center}
+h2{font-size:clamp(1.8rem,3.6vw,2.7rem);line-height:1.15;letter-spacing:-.02em;margin:0;text-wrap:balance}
+.head p{color:var(--muted);margin:14px 0 0;font-size:1.05rem}
+/* before/after */
+.ba{position:relative;overflow:hidden;border-radius:var(--r);direction:ltr;background:#000;user-select:none;-webkit-user-select:none;touch-action:pan-y}
+.ba img{width:100%;height:auto;pointer-events:none}
+.ba .b{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--p,50%)) 0 0)}
+.ba .b img{height:100%;object-fit:cover}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:ew-resize;touch-action:pan-y}
+.ba .h{position:absolute;top:0;bottom:0;left:var(--p,50%);width:2px;margin-left:-1px;background:#fff;box-shadow:0 0 12px #0008;pointer-events:none}
+.ba .h::after{content:"";position:absolute;top:50%;left:50%;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;
+background:#fff center/22px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b0c14' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 7-5 5 5 5M15 7l5 5-5 5'/%3E%3C/svg%3E");box-shadow:0 6px 20px #0007}
+.ba input:focus-visible ~ .h::after{outline:3px solid var(--rose);outline-offset:3px}
+.ba .t{position:absolute;bottom:14px;font-size:.78rem;font-weight:600;letter-spacing:.04em;padding:5px 10px;border-radius:8px;
+background:rgba(0,0,0,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);pointer-events:none}
+.ba .t.l{left:14px}.ba .t.r{right:14px}
+.cmp{display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:center;margin-bottom:88px}
+.cmp:last-of-type{margin-bottom:0}
+.cmp.flip{grid-template-columns:1fr 1.25fr}.cmp.flip .media{order:2}
+.cmp.tall,.cmp.tall.flip{grid-template-columns:.8fr 1fr}
+.cmp.tall .media{max-width:440px;justify-self:center;width:100%}
+.tag{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:var(--grad);
+-webkit-background-clip:text;background-clip:text;color:transparent}
+.cmp h3{font-size:clamp(1.45rem,2.6vw,2rem);line-height:1.2;letter-spacing:-.015em;margin:8px 0 14px}
+.cmp p{color:var(--muted);margin:0}
+.steps{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:8px}
+.steps li{display:flex;gap:10px;align-items:flex-start;font-size:.93rem;color:var(--fg);background:var(--card);border:1px solid var(--line);
+border-radius:12px;padding:9px 12px}
+.steps .ico{width:17px;height:17px;flex:none;margin-top:4px;color:var(--amber)}
+.cap{max-width:52rem;margin:26px auto 0}.cap strong{font-size:1.15rem}.cap p{color:var(--muted);margin:8px 0 0}
+.steps.inline{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}.steps.inline li{font-size:.88rem}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:24px}
+.stats div{background:var(--bg2);padding:26px 18px;text-align:center}
+.stats b{display:block;font-size:clamp(2rem,4vw,2.8rem);line-height:1;letter-spacing:-.03em;font-weight:800}
+.stats span{display:block;color:var(--muted);font-size:.88rem;margin-top:10px}
+@media (max-width:860px){.stats{grid-template-columns:repeat(2,1fr)}.stats div:last-child{grid-column:span 2}}
+.note{color:var(--dim);font-size:.82rem;text-align:center;margin-top:40px}
+@media (max-width:860px){.cmp,.cmp.tall,.cmp.flip,.cmp.tall.flip{grid-template-columns:1fr;gap:26px}.cmp.flip .media{order:0}}
+/* features */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px}
+.card .ihead{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.card .ihead .ico{width:42px;height:42px;padding:9px;border-radius:12px;background:linear-gradient(140deg,#8b7bff33,#ff6f9f22);color:#fff}
+.card h3{margin:0;font-size:1.25rem}
+.card dl{margin:0;display:grid;gap:14px}
+.card dt{font-weight:650}
+.card dd{margin:2px 0 0;color:var(--muted);font-size:.94rem}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+/* privacy band */
+.band{border-radius:32px;padding:56px 44px;background:radial-gradient(80% 120% at 0% 0%,#8b7bff2a,transparent 60%),radial-gradient(60% 100% at 100% 100%,#ff6f9f22,transparent 60%),var(--bg2);
+border:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center}
+.band .ico.lg{width:88px;height:88px;color:var(--violet)}
+.band h2{font-size:clamp(1.6rem,3vw,2.3rem)}
+.band p{color:var(--muted);margin:12px 0 0}
+.band ul{list-style:none;display:flex;flex-wrap:wrap;gap:10px 22px;padding:0;margin:20px 0 0}
+.band li{display:flex;gap:8px;align-items:center;font-weight:600;font-size:.95rem}
+.band li .ico{width:18px;height:18px;color:#7ee0a1}
+@media (max-width:700px){.band{grid-template-columns:1fr;padding:36px 24px}}
+/* pricing */
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:880px;margin:0 auto}
+.plan{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:32px;position:relative}
+.plan.pro{background:linear-gradient(var(--bg2),var(--bg2)) padding-box,var(--grad) border-box;border:1.5px solid transparent;box-shadow:0 30px 80px -40px #ff6f9faa}
+.plan .name{font-weight:700;font-size:1.05rem;color:var(--muted)}
+.plan .price{font-size:2.2rem;font-weight:750;letter-spacing:-.02em;margin:6px 0 18px}
+.plan .badge{position:absolute;top:-13px;inset-inline-end:22px;background:var(--grad);color:#120c18;font-size:.78rem;font-weight:700;padding:5px 12px;border-radius:999px}
+.plan ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.plan li{display:flex;gap:10px;align-items:flex-start}
+.plan li .ico{width:18px;height:18px;flex:none;margin-top:4px;color:var(--amber)}
+.plan .fine{color:var(--dim);font-size:.85rem;margin:18px 0 0}
+@media (max-width:700px){.plans{grid-template-columns:1fr}}
+/* faq */
+.faq{max-width:780px;margin:0 auto;display:grid;gap:10px}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:0 20px}
+.faq summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:600;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--muted);font-size:1.3rem;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq details p{margin:0 0 18px;color:var(--muted)}
+.more{text-align:center;margin-top:22px}.more a{color:var(--violet)}
+/* final cta */
+.final{position:relative;border-radius:32px;overflow:hidden;min-height:380px;display:grid;place-items:center;text-align:center;padding:60px 24px}
+.final img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+.final::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#06070d33,#06070dcc)}
+.final .in{position:relative}
+.final h2{font-size:clamp(1.9rem,4vw,3rem);max-width:18ch;margin:0 auto 26px}
+/* footer */
+footer.foot{border-top:1px solid var(--line);margin-top:96px;padding:40px 0 56px;color:var(--dim);font-size:.9rem}
+footer.foot .row{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-between;align-items:center}
+footer.foot nav{display:flex;flex-wrap:wrap;gap:8px 20px}
+footer.foot a{text-decoration:none;color:var(--muted)}footer.foot a:hover{color:var(--fg)}
+/* guide */
+.ghero{padding-block:72px 24px;text-align:center}
+.ghero h1{font-size:clamp(2.2rem,5vw,3.6rem);letter-spacing:-.025em;margin:0}
+.ghero p{color:var(--muted);font-size:1.1rem;margin:14px auto 0;max-width:40rem}
+.glay{display:grid;grid-template-columns:240px 1fr;gap:48px;align-items:start;padding-top:40px}
+.toc{position:sticky;top:88px;max-height:calc(100vh - 110px);overflow:auto;padding-inline-end:6px}
+.toc b{display:block;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
+.toc ol{list-style:none;padding:0;margin:0;display:grid;gap:2px;counter-reset:t}
+.toc a{display:flex;gap:10px;text-decoration:none;color:var(--muted);padding:6px 10px;border-radius:9px;font-size:.92rem}
+.toc a::before{counter-increment:t;content:counter(t,decimal-leading-zero);color:var(--dim);font-variant-numeric:tabular-nums}
+.toc a:hover{background:var(--card);color:var(--fg)}
+.gsec{scroll-margin-top:88px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:32px;margin-bottom:22px}
+.gsec h2{font-size:1.55rem;display:flex;gap:14px;align-items:baseline}
+.gsec h2 .n{font-size:.95rem;font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.gsec .intro{color:var(--muted);margin:12px 0 0}
+.gsec ol.st{counter-reset:s;list-style:none;padding:0;margin:20px 0 0;display:grid;gap:12px}
+.gsec ol.st li{position:relative;padding-inline-start:44px;min-height:30px}
+.gsec ol.st li::before{counter-increment:s;content:counter(s);position:absolute;inset-inline-start:0;top:0;width:30px;height:30px;border-radius:50%;
+display:grid;place-items:center;font-size:.85rem;font-weight:700;background:var(--card2);border:1px solid var(--line)}
+.tipbox{margin:20px 0 0;border-radius:14px;padding:14px 16px;background:#ffb36b12;border:1px solid #ffb36b33;display:grid;gap:6px}
+.tipbox .tl{display:flex;gap:8px;align-items:center;font-weight:700;color:var(--amber);font-size:.9rem}
+.tipbox .tl .ico{width:18px;height:18px}
+.tipbox p{margin:0;color:var(--fg);font-size:.94rem}
+.help{text-align:center;margin:40px 0 0;color:var(--muted)}.help a{color:var(--violet)}
+@media (max-width:900px){.glay{grid-template-columns:1fr}.toc{position:static;max-height:none}.toc ol{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.gsec{padding:24px 20px}.toc ol{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+</head>
+<body>
+<div class="sky"></div>
+<header class="top"><div class="wrap bar">
+<a class="brand" href="/pt-BR/"><img src="/icon.png" alt="" width="30" height="30">Luneki</a>
+<nav class="nav" aria-label="main"><a href="/pt-BR/#compare" class="opt">Antes e depois</a><a href="/pt-BR/#features" class="opt">Recursos</a><a href="/pt-BR/guide/" aria-current="page">Guia</a><a href="/pt-BR/#pricing" class="opt">Preço</a><a href="/support?lang=pt-BR">Suporte</a></nav>
+<label class="lang"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span class="sr" hidden>Idioma</span>
+<select data-nav aria-label="Idioma"><option value="/zh-Hant/guide/">繁體中文</option><option value="/en/guide/">English</option><option value="/zh-Hans/guide/">简体中文</option><option value="/ja/guide/">日本語</option><option value="/ko/guide/">한국어</option><option value="/es/guide/">Español</option><option value="/fr/guide/">Français</option><option value="/de/guide/">Deutsch</option><option value="/it/guide/">Italiano</option><option value="/pt-BR/guide/" selected>Português (Brasil)</option><option value="/ru/guide/">Русский</option><option value="/tr/guide/">Türkçe</option><option value="/ar/guide/">العربية</option><option value="/hi/guide/">हिन्दी</option><option value="/th/guide/">ไทย</option><option value="/vi/guide/">Tiếng Việt</option><option value="/id/guide/">Bahasa Indonesia</option></select></label>
+<a class="btn pri sm" href="https://apps.apple.com/app/id6802241667"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8-.1 0-2.5-1-2.5-3.9zM14 5.3c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z" fill="currentColor" stroke="none"/></svg>Baixar o app</a>
+</div></header>
+<main>
+<section class="ghero wrap"><h1 class="grad">Guia de uso</h1><p>Da importação da primeira foto à exportação final — todos os recursos explicados.</p></section>
+<div class="wrap glay"><nav class="toc" aria-label="Sumário"><b>Sumário</b><ol><li><a href="#start">Primeiros passos</a></li><li><a href="#editor">A tela de edição</a></li><li><a href="#adjustments">Ajustes e edição não destrutiva</a></li><li><a href="#night">Fotos de astro e noturnas</a></li><li><a href="#stacking">Empilhamento de várias fotos (Fogos, Estrelas, HDR)</a></li><li><a href="#sky">Ferramentas de céu</a></li><li><a href="#local">Ajustes locais e máscaras</a></li><li><a href="#color">Curvas, HSL e filtros</a></li><li><a href="#portrait">Retratos: retoque, pele e formato do rosto</a></li><li><a href="#makeup">Maquiagem e cor do cabelo</a></li><li><a href="#bokeh">Desfoque de fundo e bokeh</a></li><li><a href="#remove">Remoção de objetos</a></li><li><a href="#presets">Predefinições e lote</a></li><li><a href="#export">Exportar</a></li></ol></nav>
+<div><section class="gsec" id="start"><h2><span class="n">01</span>Primeiros passos</h2>
+<p class="intro">Na primeira vez que você abre o Luneki, ele pergunta o que você mais edita (Paisagem, noite e astro / Retratos e selfies / Ambos) e coloca primeiro as ferramentas que você mais usa. Todos os recursos continuam sempre disponíveis, e você pode mudar isso depois em Configurações → Ordem das ferramentas.</p><ol class="st"><li>Toque em Escolher foto para selecionar da fototeca, ou em Importar RAW para abrir direto um arquivo RAW de câmera.</li><li>Você também pode tocar no ícone da câmera para fotografar dentro do app e começar a editar na hora.</li><li>As fotos adicionadas aparecem na faixa de miniaturas embaixo; toque para alternar entre elas. Fotos editadas ficam marcadas, e ao voltar para elas nada é recalculado.</li></ol><div class="tipbox"><span class="tl"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>Dica</span><p>Os originais da sua fototeca nunca são alterados, e remover uma foto dentro do app não afeta a fototeca.</p></div></section><section class="gsec" id="editor"><h2><span class="n">02</span>A tela de edição</h2>
+<p class="intro">A foto fica em cima; embaixo ficam a paleta de ferramentas e os controles da ferramenta atual.</p><ol class="st"><li>A paleta de ferramentas é organizada por categoria: Predefinições, Básico, Um toque, Paisagem, Filtro, Retrato, Corpo. Toque em uma aba de categoria para ir até ela.</li><li>Toque em qualquer ferramenta para adicioná-la como um ajuste; os controles deslizantes aparecem embaixo.</li><li>Toque e segure a foto, ou toque no ícone de olho no canto superior direito, para comparar com o original.</li><li>Faça o gesto de pinça para ampliar e conferir detalhes; com o zoom, a área visível é renderizada de novo em resolução total. Toque em Ajustar para voltar à foto inteira.</li><li>O botão de tela cheia no canto superior direito esconde todos os painéis para você ver só a foto.</li><li>Desfazer e Refazer ficam na barra de ferramentas; Copiar e Colar aplicam uma edição inteira a outra foto.</li></ol><div class="tipbox"><span class="tl"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>Dica</span><p>Toque duas vezes em um controle deslizante bidirecional (aquele com 0 no meio) para zerá-lo.</p></div></section><section class="gsec" id="adjustments"><h2><span class="n">03</span>Ajustes e edição não destrutiva</h2>
+<p class="intro">Cada edição no Luneki é um ajuste separado, empilhado sobre a foto como uma camada.</p><ol class="st"><li>Toque em Ajustes, na parte de cima, para ver todos os ajustes que você adicionou.</li><li>Abra qualquer ajuste de novo para alterá-lo, desativá-lo (para comparar) ou excluí-lo.</li><li>Você pode adicionar a mesma ferramenta mais de uma vez — por exemplo, dois ajustes locais, um para o céu e outro para o chão.</li></ol><div class="tipbox"><span class="tl"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>Dica</span><p>Como o original nunca é alterado, você pode experimentar à vontade e voltar atrás quando quiser.</p></div></section><section class="gsec" id="night"><h2><span class="n">04</span>Fotos de astro e noturnas</h2>
+<p class="intro">Os problemas mais comuns em fotos noturnas e de astro são ruído, poluição luminosa e contraste apagado. Uma boa ordem:</p><ol class="st"><li>Redução de ruído IA: tire primeiro o ruído de ISO alto. Em excesso, suaviza os detalhes; para estrelas, 40–70 funciona bem.</li><li>Detalhe das sombras: use Remover névoa para atravessar a poluição luminosa e a névoa, Nitidez para realçar a estrutura da Via Láctea, e Sombras / Luzes para recuperar as pontas da faixa tonal.</li><li>Básico: adicione um pouco de contraste e esfrie a temperatura para devolver ao céu noturno o azul profundo.</li><li>Lente: adicione Estrela de luz para transformar as luzes da cidade em estrelas de 4, 6 ou 8 pontas; use a vinheta para levar o olhar ao centro.</li></ol><div class="tipbox"><span class="tl"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>Dica</span><p>Para névoa diurna, Remover névoa IA dá o melhor resultado; o Remover névoa do Detalhe das sombras é mais indicado para fotos noturnas e de astro.</p></div></section><section class="gsec" id="stacking"><h2><span class="n">05</span>Empilhamento de várias fotos (Fogos, Estrelas, HDR)</h2>
+<p class="intro">Combine várias fotos em uma para reduzir ruído, capturar rastros de fogos de artifício ou ampliar a faixa dinâmica.</p><ol class="st"><li>Toque em Camadas, na parte de cima, e adicione fotos — várias tomadas da mesma cena.</li><li>Escolha um modo em Modo de empilhamento: Fogos (mantém as partes mais claras de cada foto), Estrelado (faz a média para reduzir ruído) ou HDR (combina exposições e remove fantasmas).</li><li>Toque em Alinhar: o modo Estrelado alinha as estrelas; os outros modos alinham o enquadramento. Toque em Reverter alinhamento para voltar ao estado sem alinhamento.</li><li>Cada camada pode ter uma máscara — por exemplo, Céu automático empilha só o céu e mantém a paisagem nítida.</li><li>Quando terminar, escolha Composição para continuar editando o resultado com todas as ferramentas.</li></ol><div class="tipbox"><span class="tl"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>Dica</span><p>Com tripé o resultado é melhor. Para estrelas, use 4 fotos ou mais; quanto menor o intervalo entre elas, menos as estrelas deixam rastro.</p><p>Use Reabrir última pilha para continuar a edição depois.</p></div></section><section class="gsec" id="sky"><h2><span class="n">06</span>Ferramentas de céu</h2>
+<p class="intro">A ferramenta Céu primeiro detecta o céu e só atua sobre ele.</p><ol class="st"><li>Escolha um modo de detecção: Automático (baseado em profundidade, mais amplo) ou Preciso (segmentação semântica que acompanha prédios e árvores).</li><li>Aplique efeitos com os controles: Céu azul, Pôr do sol (degradê violeta-rosado), Céu em chamas (laranja-avermelhado), Adicionar nuvens, Profundidade (nuvens 3D), Nitidez — ou mude direto o matiz do céu.</li><li>Ative Mostrar máscara para ver a área detectada e use o pincel para adicionar ou apagar e corrigir as bordas.</li></ol><div class="tipbox"><span class="tl"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>Dica</span><p>Em Borda, escolha Suave para cobrir pequenas falhas entre as folhas.</p></div></section><section class="gsec" id="local"><h2><span class="n">07</span>Ajustes locais e máscaras</h2>
+<p class="intro">Quer clarear o sujeito e escurecer o céu? Crie uma máscara com Seletivo e depois ajuste exposição, contraste, temperatura e mais.</p><ol class="st"><li>Em Região, escolha Céu, Sujeito, Pessoa ou Fundo, ou toque em qualquer objeto da foto para selecioná-lo (dá para tocar em vários).</li><li>Mude para Pincel para adicionar áreas à mão ou removê-las com Apagar; o tamanho do pincel é ajustável.</li><li>Ative Mostrar máscara para conferir a área e depois mexa nos controles abaixo.</li></ol><div class="tipbox"><span class="tl"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>Dica</span><p>Adicione vários ajustes locais para dar ao céu, ao chão e às pessoas configurações próprias.</p></div></section><section class="gsec" id="color"><h2><span class="n">08</span>Curvas, HSL e filtros</h2>
+<p class="intro">Quando você precisa de controle preciso das cores:</p><ol class="st"><li>Curvas: ajuste a curva geral ou os canais vermelho, verde e azul individualmente; abra o editor em tela cheia para pontos de controle mais finos.</li><li>HSL: ajuste matiz, saturação e luminância de oito cores separadamente — por exemplo, deixe só o céu mais azul ou os tons de pele mais limpos.</li><li>Filtro: 16 estilos com intensidade ajustável, que se somam aos seus outros ajustes.</li></ol></section><section class="gsec" id="portrait"><h2><span class="n">09</span>Retratos: retoque, pele e formato do rosto</h2>
+<p class="intro">As ferramentas de retrato detectam rostos e corpos automaticamente. Em fotos em grupo, escolha primeiro quem ajustar.</p><ol class="st"><li>Retoque de pele avançado: a IA remove imperfeições mantendo poros e textura — o melhor ponto de partida.</li><li>Pele perfeita: correção automática, rugas, olheiras, clareamento, clareamento dos dentes, e temperatura e tom da pele.</li><li>Espinhas: toque em uma mancha ou espinha para removê-la; desfaça o último ponto ou limpe tudo.</li><li>Remodelar: bochechas, tamanho dos olhos, tamanho do nariz, queixo, testa, largura do rosto, boca, papada e mais, seguindo os contornos reais.</li><li>Corpo: silhueta, barriga, comprimento das pernas, coxas, braços, ombros, quadris e mais; partes do corpo fora do quadro nunca são distorcidas.</li></ol><div class="tipbox"><span class="tl"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>Dica</span><p>Cadastre quem você fotografa com frequência (PRO): as novas fotos reconhecem essas pessoas automaticamente e perguntam se você quer aplicar os ajustes pessoais delas.</p></div></section><section class="gsec" id="makeup"><h2><span class="n">10</span>Maquiagem e cor do cabelo</h2>
+<p class="intro">A ferramenta Maquiagem cobre 22 áreas, cada uma com controle de intensidade e amostras de cor.</p><ol class="st"><li>O jeito mais rápido: escolha um visual em Predefinições, como Maquiagem leve, Maquiagem glam, K-Glow ou J-Sweet.</li><li>Depois abra Maquiagem para ajustar cada área: base, contorno, sombra do nariz, iluminador, sobrancelha, sombra, glitter, delineador, rímel, pálpebra inferior, blush, batom, gloss labial, pele iluminada e mais.</li><li>Intensidade geral ajusta todas as áreas de uma vez.</li><li>Cor do cabelo detecta o cabelo e mantém a luz e a sombra de cada fio — é só escolher uma amostra.</li></ol></section><section class="gsec" id="bokeh"><h2><span class="n">11</span>Desfoque de fundo e bokeh</h2>
+<p class="intro">Simule a profundidade de campo rasa de uma lente de grande abertura.</p><ol class="st"><li>Adicione Desfoque de fundo; o app encontra as pessoas automaticamente e as mantém nítidas. Você também pode tocar ou pintar as pessoas que quer manter nítidas.</li><li>Diafragma controla a intensidade do desfoque; Foco e Borda ajustam a área nítida e a transição.</li><li>Ative Bokeh e as luzes do fundo viram bolas de bokeh redondas; ajuste tamanho e suavidade do bokeh, formato do diafragma e o efeito olho de gato perto das bordas.</li></ol><div class="tipbox"><span class="tl"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>Dica</span><p>Fundos noturnos com luzes rendem o bokeh mais bonito.</p></div></section><section class="gsec" id="remove"><h2><span class="n">12</span>Remoção de objetos</h2>
+<p class="intro">Tire pessoas passando, bagunça, fios elétricos ou qualquer coisa que você não queira na foto.</p><ol class="st"><li>Adicione Apagar objeto e pinte sobre o que você quer remover.</li><li>Levante o dedo e a IA preenche o fundo automaticamente.</li><li>Para manchas pequenas, um toque com Espinhas é mais rápido.</li></ol><div class="tipbox"><span class="tl"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>Dica</span><p>Pinte um pouco além das bordas do objeto para um preenchimento mais natural.</p></div></section><section class="gsec" id="presets"><h2><span class="n">13</span>Predefinições e lote</h2>
+<p class="intro">Salve os ajustes que você adora e aplique com um toque da próxima vez.</p><ol class="st"><li>As predefinições incluídas são agrupadas em Retrato, Maquiagem e Cena (Noite, Hora dourada, Ensolarado, Estrelado e mais).</li><li>Depois de editar uma foto, use Salvar predefinição em Predefinições (até 3 na versão grátis, ilimitadas com o PRO).</li><li>Na faixa de miniaturas, toque em Gerenciar → selecione várias fotos para colar uma edição em todas ou exportar a seleção (exportação em lote é PRO).</li></ol></section><section class="gsec" id="export"><h2><span class="n">14</span>Exportar</h2>
+<p class="intro">Toque em Exportar no canto superior direito, escolha as opções e salve na fototeca.</p><ol class="st"><li>Formato: JPEG, HEIC, PNG ou TIFF, com profundidade de cor de 16 bits opcional e ajuste de qualidade.</li><li>Tamanho: resolução original ou 720p, 1080p, 1440p ou 4K (a versão grátis vai até 1080p).</li><li>Opcionalmente, mantenha o EXIF e o perfil de cor.</li><li>A posição e o tamanho da marca d&#x27;água são ajustáveis; com o PRO dá para desativá-la.</li></ol><div class="tipbox"><span class="tl"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></svg>Dica</span><p>Durante a exportação em lote, fique na tela e mantenha o aparelho desbloqueado até tudo terminar.</p></div></section><p class="help">Ainda tem dúvidas? <a href="/support?lang=pt-BR">Acesse o Suporte ou mande um e-mail →</a></p></div></div>
+</main>
+<footer class="foot"><div class="wrap row">
+<div><strong style="color:var(--fg)">Luneki</strong> · Edição de fotos completa no seu celular</div>
+<nav><a href="/pt-BR/">Início</a><a href="/pt-BR/guide/">Guia</a><a href="/support?lang=pt-BR">Suporte</a>
+<a href="/privacy?lang=pt-BR">Privacidade</a><a href="mailto:zhe0712@gmail.com">Contato</a></nav>
+</div></footer>
+<script>
+document.querySelectorAll('.ba input').forEach(function(r){
+  var box=r.closest('.ba');
+  function set(){box.style.setProperty('--p',r.value+'%');}
+  r.addEventListener('input',set);set();
+});
+document.querySelectorAll('select[data-nav]').forEach(function(s){
+  s.addEventListener('change',function(){location.href=s.value;});
+});
+</script>
+</body>
+</html>

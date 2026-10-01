@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Luneki — iPhone에서 완성하는 별하늘·야경·인물 보정</title>
+<meta name="description" content="AI 노이즈 제거, 여러 장 합성, 하늘 보정, 곡선과 HSL, 피부 보정과 메이크업, 배경 보케까지. 모두 iPhone에서 오프라인으로 처리됩니다. 한 번 구매로 끝, 구독은 필요 없습니다.">
+<meta name="theme-color" content="#06070d">
+<meta property="og:title" content="Luneki — iPhone에서 완성하는 별하늘·야경·인물 보정">
+<meta property="og:description" content="AI 노이즈 제거, 여러 장 합성, 하늘 보정, 곡선과 HSL, 피부 보정과 메이크업, 배경 보케까지. 모두 iPhone에서 오프라인으로 처리됩니다. 한 번 구매로 끝, 구독은 필요 없습니다.">
+<meta property="og:image" content="https://luneki.cutesf.com/assets/harbor-after.jpg">
+<link rel="icon" href="/icon.png"><link rel="apple-touch-icon" href="/icon.png">
+<link rel="alternate" hreflang="zh-Hant" href="/zh-Hant/"><link rel="alternate" hreflang="en" href="/en/"><link rel="alternate" hreflang="zh-Hans" href="/zh-Hans/"><link rel="alternate" hreflang="ja" href="/ja/"><link rel="alternate" hreflang="ko" href="/ko/"><link rel="alternate" hreflang="es" href="/es/"><link rel="alternate" hreflang="fr" href="/fr/"><link rel="alternate" hreflang="de" href="/de/"><link rel="alternate" hreflang="it" href="/it/"><link rel="alternate" hreflang="pt-BR" href="/pt-BR/"><link rel="alternate" hreflang="ru" href="/ru/"><link rel="alternate" hreflang="tr" href="/tr/"><link rel="alternate" hreflang="ar" href="/ar/"><link rel="alternate" hreflang="hi" href="/hi/"><link rel="alternate" hreflang="th" href="/th/"><link rel="alternate" hreflang="vi" href="/vi/"><link rel="alternate" hreflang="id" href="/id/">
+<style>
+:root{--bg:#06070d;--bg2:#0c0e1a;--card:rgba(255,255,255,.045);--card2:rgba(255,255,255,.075);
+--line:rgba(255,255,255,.10);--fg:#eef0f8;--muted:#a3a7bd;--dim:#7c809a;
+--violet:#8b7bff;--rose:#ff6f9f;--amber:#ffb36b;--grad:linear-gradient(100deg,#8b7bff 0%,#ff6f9f 52%,#ffb36b 100%);
+--r:22px;--max:1160px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.7 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",
+"PingFang TC","PingFang SC","Hiragino Sans","Noto Sans","Noto Sans CJK TC",system-ui,sans-serif;overflow-x:hidden}
+a{color:inherit}img{max-width:100%;display:block}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+.sky{position:fixed;inset:0;z-index:-1;pointer-events:none;
+background:radial-gradient(1px 1px at 12% 18%,#fff8 50%,transparent 51%),radial-gradient(1px 1px at 72% 12%,#fff6 50%,transparent 51%),
+radial-gradient(1.5px 1.5px at 38% 34%,#fff7 50%,transparent 51%),radial-gradient(1px 1px at 88% 44%,#fff5 50%,transparent 51%),
+radial-gradient(1px 1px at 22% 66%,#fff5 50%,transparent 51%),radial-gradient(1.5px 1.5px at 58% 82%,#fff4 50%,transparent 51%),
+radial-gradient(1px 1px at 92% 78%,#fff5 50%,transparent 51%),radial-gradient(1px 1px at 6% 90%,#fff4 50%,transparent 51%),
+radial-gradient(60% 50% at 80% -10%,#3b2a8a55,transparent 70%),radial-gradient(50% 40% at 0% 10%,#7a2a5c40,transparent 70%),var(--bg)}
+/* header */
+header.top{position:sticky;top:0;z-index:20;backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);
+background:rgba(6,7,13,.72);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:18px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;letter-spacing:.01em;white-space:nowrap}
+.brand img{width:30px;height:30px;border-radius:8px}
+.nav{display:flex;gap:4px;margin-inline-start:auto;align-items:center}
+.nav a{text-decoration:none;color:var(--muted);font-size:.92rem;padding:8px 10px;border-radius:10px}
+.nav a:hover,.nav a[aria-current=page]{color:var(--fg);background:var(--card)}
+.lang{position:relative;display:flex;align-items:center;gap:6px;color:var(--muted)}
+.lang select{appearance:none;-webkit-appearance:none;background:var(--card);color:var(--fg);border:1px solid var(--line);
+border-radius:10px;font:inherit;font-size:.88rem;padding:7px 28px 7px 10px;cursor:pointer;max-width:160px}
+.lang::after{content:"";position:absolute;inset-inline-end:11px;top:50%;width:6px;height:6px;border:solid var(--muted);
+border-width:0 1.5px 1.5px 0;transform:translateY(-70%) rotate(45deg);pointer-events:none}
+.lang .ico{width:18px;height:18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;font-weight:600;border-radius:999px;
+padding:13px 22px;transition:transform .15s ease,box-shadow .2s ease;white-space:nowrap}
+.btn:hover{transform:translateY(-1px)}
+.btn.pri{background:#fff;color:#0b0c14;box-shadow:0 8px 30px -8px #ff6f9f88}
+.btn.ghost{border:1px solid var(--line);color:var(--fg);background:var(--card)}
+.btn .ico{width:19px;height:19px}
+.btn.sm{padding:8px 14px;font-size:.88rem}
+@media (max-width:900px){.nav a.opt{display:none}}
+@media (max-width:620px){.nav a{display:none}.bar .btn.sm{display:none}.lang select{max-width:118px}}
+/* hero */
+.hero{padding-block:88px 40px;text-align:center}
+.eyebrow{display:inline-block;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);
+border:1px solid #ffb36b44;background:#ffb36b10;padding:6px 14px;border-radius:999px}
+h1.big{font-size:clamp(2.3rem,6.2vw,4.6rem);line-height:1.08;letter-spacing:-.025em;margin:22px auto 0;max-width:13em;text-wrap:balance;white-space:pre-line}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:clamp(1.02rem,1.6vw,1.2rem);color:var(--muted);max-width:44rem;margin:22px auto 0}
+.ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:28px 0 0;padding:0;list-style:none}
+.chips li{font-size:.85rem;color:var(--muted);border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px}
+.hero-shot{margin:56px auto 0;max-width:1080px;border-radius:28px;padding:1px;background:linear-gradient(140deg,#8b7bff66,#ff6f9f44 50%,#ffb36b55)}
+.hero-shot .ba{border-radius:27px}
+/* sections */
+section.blk{padding-block:96px}
+.head{max-width:46rem;margin:0 auto 48px;text-align:center}
+h2{font-size:clamp(1.8rem,3.6vw,2.7rem);line-height:1.15;letter-spacing:-.02em;margin:0;text-wrap:balance}
+.head p{color:var(--muted);margin:14px 0 0;font-size:1.05rem}
+/* before/after */
+.ba{position:relative;overflow:hidden;border-radius:var(--r);direction:ltr;background:#000;user-select:none;-webkit-user-select:none;touch-action:pan-y}
+.ba img{width:100%;height:auto;pointer-events:none}
+.ba .b{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--p,50%)) 0 0)}
+.ba .b img{height:100%;object-fit:cover}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:ew-resize;touch-action:pan-y}
+.ba .h{position:absolute;top:0;bottom:0;left:var(--p,50%);width:2px;margin-left:-1px;background:#fff;box-shadow:0 0 12px #0008;pointer-events:none}
+.ba .h::after{content:"";position:absolute;top:50%;left:50%;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;
+background:#fff center/22px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b0c14' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 7-5 5 5 5M15 7l5 5-5 5'/%3E%3C/svg%3E");box-shadow:0 6px 20px #0007}
+.ba input:focus-visible ~ .h::after{outline:3px solid var(--rose);outline-offset:3px}
+.ba .t{position:absolute;bottom:14px;font-size:.78rem;font-weight:600;letter-spacing:.04em;padding:5px 10px;border-radius:8px;
+background:rgba(0,0,0,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);pointer-events:none}
+.ba .t.l{left:14px}.ba .t.r{right:14px}
+.cmp{display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:center;margin-bottom:88px}
+.cmp:last-of-type{margin-bottom:0}
+.cmp.flip{grid-template-columns:1fr 1.25fr}.cmp.flip .media{order:2}
+.cmp.tall,.cmp.tall.flip{grid-template-columns:.8fr 1fr}
+.cmp.tall .media{max-width:440px;justify-self:center;width:100%}
+.tag{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:var(--grad);
+-webkit-background-clip:text;background-clip:text;color:transparent}
+.cmp h3{font-size:clamp(1.45rem,2.6vw,2rem);line-height:1.2;letter-spacing:-.015em;margin:8px 0 14px}
+.cmp p{color:var(--muted);margin:0}
+.steps{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:8px}
+.steps li{display:flex;gap:10px;align-items:flex-start;font-size:.93rem;color:var(--fg);background:var(--card);border:1px solid var(--line);
+border-radius:12px;padding:9px 12px}
+.steps .ico{width:17px;height:17px;flex:none;margin-top:4px;color:var(--amber)}
+.cap{max-width:52rem;margin:26px auto 0}.cap strong{font-size:1.15rem}.cap p{color:var(--muted);margin:8px 0 0}
+.steps.inline{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}.steps.inline li{font-size:.88rem}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:24px}
+.stats div{background:var(--bg2);padding:26px 18px;text-align:center}
+.stats b{display:block;font-size:clamp(2rem,4vw,2.8rem);line-height:1;letter-spacing:-.03em;font-weight:800}
+.stats span{display:block;color:var(--muted);font-size:.88rem;margin-top:10px}
+@media (max-width:860px){.stats{grid-template-columns:repeat(2,1fr)}.stats div:last-child{grid-column:span 2}}
+.note{color:var(--dim);font-size:.82rem;text-align:center;margin-top:40px}
+@media (max-width:860px){.cmp,.cmp.tall,.cmp.flip,.cmp.tall.flip{grid-template-columns:1fr;gap:26px}.cmp.flip .media{order:0}}
+/* features */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px}
+.card .ihead{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.card .ihead .ico{width:42px;height:42px;padding:9px;border-radius:12px;background:linear-gradient(140deg,#8b7bff33,#ff6f9f22);color:#fff}
+.card h3{margin:0;font-size:1.25rem}
+.card dl{margin:0;display:grid;gap:14px}
+.card dt{font-weight:650}
+.card dd{margin:2px 0 0;color:var(--muted);font-size:.94rem}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+/* privacy band */
+.band{border-radius:32px;padding:56px 44px;background:radial-gradient(80% 120% at 0% 0%,#8b7bff2a,transparent 60%),radial-gradient(60% 100% at 100% 100%,#ff6f9f22,transparent 60%),var(--bg2);
+border:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center}
+.band .ico.lg{width:88px;height:88px;color:var(--violet)}
+.band h2{font-size:clamp(1.6rem,3vw,2.3rem)}
+.band p{color:var(--muted);margin:12px 0 0}
+.band ul{list-style:none;display:flex;flex-wrap:wrap;gap:10px 22px;padding:0;margin:20px 0 0}
+.band li{display:flex;gap:8px;align-items:center;font-weight:600;font-size:.95rem}
+.band li .ico{width:18px;height:18px;color:#7ee0a1}
+@media (max-width:700px){.band{grid-template-columns:1fr;padding:36px 24px}}
+/* pricing */
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:880px;margin:0 auto}
+.plan{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:32px;position:relative}
+.plan.pro{background:linear-gradient(var(--bg2),var(--bg2)) padding-box,var(--grad) border-box;border:1.5px solid transparent;box-shadow:0 30px 80px -40px #ff6f9faa}
+.plan .name{font-weight:700;font-size:1.05rem;color:var(--muted)}
+.plan .price{font-size:2.2rem;font-weight:750;letter-spacing:-.02em;margin:6px 0 18px}
+.plan .badge{position:absolute;top:-13px;inset-inline-end:22px;background:var(--grad);color:#120c18;font-size:.78rem;font-weight:700;padding:5px 12px;border-radius:999px}
+.plan ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.plan li{display:flex;gap:10px;align-items:flex-start}
+.plan li .ico{width:18px;height:18px;flex:none;margin-top:4px;color:var(--amber)}
+.plan .fine{color:var(--dim);font-size:.85rem;margin:18px 0 0}
+@media (max-width:700px){.plans{grid-template-columns:1fr}}
+/* faq */
+.faq{max-width:780px;margin:0 auto;display:grid;gap:10px}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:0 20px}
+.faq summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:600;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--muted);font-size:1.3rem;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq details p{margin:0 0 18px;color:var(--muted)}
+.more{text-align:center;margin-top:22px}.more a{color:var(--violet)}
+/* final cta */
+.final{position:relative;border-radius:32px;overflow:hidden;min-height:380px;display:grid;place-items:center;text-align:center;padding:60px 24px}
+.final img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+.final::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#06070d33,#06070dcc)}
+.final .in{position:relative}
+.final h2{font-size:clamp(1.9rem,4vw,3rem);max-width:18ch;margin:0 auto 26px}
+/* footer */
+footer.foot{border-top:1px solid var(--line);margin-top:96px;padding:40px 0 56px;color:var(--dim);font-size:.9rem}
+footer.foot .row{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-between;align-items:center}
+footer.foot nav{display:flex;flex-wrap:wrap;gap:8px 20px}
+footer.foot a{text-decoration:none;color:var(--muted)}footer.foot a:hover{color:var(--fg)}
+/* guide */
+.ghero{padding-block:72px 24px;text-align:center}
+.ghero h1{font-size:clamp(2.2rem,5vw,3.6rem);letter-spacing:-.025em;margin:0}
+.ghero p{color:var(--muted);font-size:1.1rem;margin:14px auto 0;max-width:40rem}
+.glay{display:grid;grid-template-columns:240px 1fr;gap:48px;align-items:start;padding-top:40px}
+.toc{position:sticky;top:88px;max-height:calc(100vh - 110px);overflow:auto;padding-inline-end:6px}
+.toc b{display:block;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
+.toc ol{list-style:none;padding:0;margin:0;display:grid;gap:2px;counter-reset:t}
+.toc a{display:flex;gap:10px;text-decoration:none;color:var(--muted);padding:6px 10px;border-radius:9px;font-size:.92rem}
+.toc a::before{counter-increment:t;content:counter(t,decimal-leading-zero);color:var(--dim);font-variant-numeric:tabular-nums}
+.toc a:hover{background:var(--card);color:var(--fg)}
+.gsec{scroll-margin-top:88px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:32px;margin-bottom:22px}
+.gsec h2{font-size:1.55rem;display:flex;gap:14px;align-items:baseline}
+.gsec h2 .n{font-size:.95rem;font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.gsec .intro{color:var(--muted);margin:12px 0 0}
+.gsec ol.st{counter-reset:s;list-style:none;padding:0;margin:20px 0 0;display:grid;gap:12px}
+.gsec ol.st li{position:relative;padding-inline-start:44px;min-height:30px}
+.gsec ol.st li::before{counter-increment:s;content:counter(s);position:absolute;inset-inline-start:0;top:0;width:30px;height:30px;border-radius:50%;
+display:grid;place-items:center;font-size:.85rem;font-weight:700;background:var(--card2);border:1px solid var(--line)}
+.tipbox{margin:20px 0 0;border-radius:14px;padding:14px 16px;background:#ffb36b12;border:1px solid #ffb36b33;display:grid;gap:6px}
+.tipbox .tl{display:flex;gap:8px;align-items:center;font-weight:700;color:var(--amber);font-size:.9rem}
+.tipbox .tl .ico{width:18px;height:18px}
+.tipbox p{margin:0;color:var(--fg);font-size:.94rem}
+.help{text-align:center;margin:40px 0 0;color:var(--muted)}.help a{color:var(--violet)}
+@media (max-width:900px){.glay{grid-template-columns:1fr}.toc{position:static;max-height:none}.toc ol{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.gsec{padding:24px 20px}.toc ol{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+</head>
+<body>
+<div class="sky"></div>
+<header class="top"><div class="wrap bar">
+<a class="brand" href="/ko/"><img src="/icon.png" alt="" width="30" height="30">Luneki</a>
+<nav class="nav" aria-label="main"><a href="/ko/#compare" class="opt">보정 전후</a><a href="/ko/#features" class="opt">기능</a><a href="/ko/guide/">사용 가이드</a><a href="/ko/#pricing" class="opt">가격</a><a href="/support?lang=ko">지원</a></nav>
+<label class="lang"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span class="sr" hidden>언어</span>
+<select data-nav aria-label="언어"><option value="/zh-Hant/">繁體中文</option><option value="/en/">English</option><option value="/zh-Hans/">简体中文</option><option value="/ja/">日本語</option><option value="/ko/" selected>한국어</option><option value="/es/">Español</option><option value="/fr/">Français</option><option value="/de/">Deutsch</option><option value="/it/">Italiano</option><option value="/pt-BR/">Português (Brasil)</option><option value="/ru/">Русский</option><option value="/tr/">Türkçe</option><option value="/ar/">العربية</option><option value="/hi/">हिन्दी</option><option value="/th/">ไทย</option><option value="/vi/">Tiếng Việt</option><option value="/id/">Bahasa Indonesia</option></select></label>
+<a class="btn pri sm" href="https://apps.apple.com/app/id6802241667"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8-.1 0-2.5-1-2.5-3.9zM14 5.3c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z" fill="currentColor" stroke="none"/></svg>App Store에서 받기</a>
+</div></header>
+<main>
+<section class="hero wrap">
+<span class="eyebrow">풍경 · 야경 · 별하늘 · 인물</span>
+<h1 class="big">카메라에 담긴 그날 밤을,
+기억 속 모습 그대로.</h1>
+<p class="lede">Luneki는 데스크톱급 보정을 iPhone에 담았습니다. AI 노이즈 제거, 여러 장 합성, 하늘, 곡선, 피부 보정과 메이크업까지 — 모든 처리가 기기 안에서 이루어지며, 사진은 절대 휴대폰 밖으로 나가지 않습니다.</p>
+<div class="ctas"><a class="btn pri" href="https://apps.apple.com/app/id6802241667"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8-.1 0-2.5-1-2.5-3.9zM14 5.3c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z" fill="currentColor" stroke="none"/></svg>App Store에서 다운로드</a>
+<a class="btn ghost" href="#compare">보정 전후 보기</a></div>
+<ul class="chips"><li>100% 오프라인 처리</li><li>한 번 구매, 구독 없음</li><li>카메라 RAW 지원</li><li>17개 언어</li></ul>
+<div class="hero-shot"><div class="ba" style="--p:50%"><img src="/assets/galaxy-after.jpg" width="1600" height="1062" alt="안개 속에서 떠오르는 은하수 — 보정 후" decoding="async"><div class="b"><img src="/assets/galaxy-before.jpg" width="1600" height="1062" alt="안개 속에서 떠오르는 은하수 — 원본" decoding="async"></div><input type="range" min="0" max="100" value="50" aria-label="보정 전후 비교 슬라이더"><div class="h"></div><span class="t l">원본</span><span class="t r">보정 후</span></div></div>
+<div class="cap"><span class="tag">별하늘</span> <strong>안개 속에서 떠오르는 은하수</strong><p>높은 ISO로 찍은 은하수는 빛공해와 옅은 안개에 묻히기 쉽습니다. 안개 제거로 깊이를 되살리고, 선명도로 은하수의 구조를 끌어낸 뒤, 색온도를 살짝 낮춰 밤하늘을 깊은 푸른빛으로 되돌립니다.</p>
+<ul class="steps inline"><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>그림자 디테일: 안개 제거 45, 선명도 30</span></li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>기본 보정: 대비 +30, 생동감 +30</span></li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>색온도 -15, 밝은 영역 -25, 어두운 영역 -15</span></li></ul></div>
+</section>
+<section class="wrap"><div class="stats"><div><b class="grad">0</b><span>장, 클라우드에 업로드되는 사진</span></div><div><b class="grad">478</b><span>개의 얼굴 특징점으로 정확한 메이크업</span></div><div><b class="grad">22</b><span>개 메이크업 부위</span></div><div><b class="grad">16</b><span>가지 스타일 필터</span></div><div><b class="grad">3</b><span>가지 합성 모드: 불꽃놀이, 별하늘, HDR</span></div></div></section>
+<section class="blk wrap" id="compare"><div class="head"><h2>드래그해서 차이를 확인하세요</h2><p>아래 이미지는 모두 Luneki로 직접 렌더링한 결과이며, 다른 소프트웨어는 전혀 쓰지 않았습니다. 가운데 핸들을 좌우로 드래그해 비교해 보세요.</p></div>
+<div class="cmp flip"><div class="media"><div class="ba" style="--p:50%"><img src="/assets/harbor-after.jpg" width="1600" height="1200" alt="밋밋한 해 질 녘이 보랏빛 노을로 — 보정 후" decoding="async" loading="lazy"><div class="b"><img src="/assets/harbor-before.jpg" width="1600" height="1200" alt="밋밋한 해 질 녘이 보랏빛 노을로 — 원본" decoding="async" loading="lazy"></div><input type="range" min="0" max="100" value="50" aria-label="보정 전후 비교 슬라이더"><div class="h"></div><span class="t l">원본</span><span class="t r">보정 후</span></div></div>
+<div><span class="tag">하늘</span><h3>밋밋한 해 질 녘이 보랏빛 노을로</h3><p>하늘 보정은 하늘을 자동으로 인식해 하늘에만 노을 그라데이션을 입힙니다. 부두, 배, 불빛은 전혀 영향을 받지 않습니다. 원본 속 불빛의 빛 갈라짐도 Luneki의 렌즈 도구로 만든 것입니다.</p><ul class="steps"><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>하늘: 노을 60 (정밀 모드)</span></li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>기본 보정: 생동감 +25, 대비 +10</span></li></ul></div></div><div class="cmp tall"><div class="media"><div class="ba" style="--p:50%"><img src="/assets/portrait-after.jpg" width="785" height="1122" alt="원터치로 완성하는 K-글로우 메이크업 — 보정 후" decoding="async" loading="lazy"><div class="b"><img src="/assets/portrait-before.jpg" width="785" height="1122" alt="원터치로 완성하는 K-글로우 메이크업 — 원본" decoding="async" loading="lazy"></div><input type="range" min="0" max="100" value="50" aria-label="보정 전후 비교 슬라이더"><div class="h"></div><span class="t l">원본</span><span class="t r">보정 후</span></div></div>
+<div><span class="tag">인물</span><h3>원터치로 완성하는 K-글로우 메이크업</h3><p>딥 피부 리터치는 모공과 질감은 살리고 잡티만 없애 줍니다. 메이크업은 얼굴의 특징점 478개에 맞춰 아이섀도, 샤이머, 속눈썹, 립 컬러를 정확히 입히고, 부위마다 따로 미세 조정할 수도 있습니다.</p><ul class="steps"><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>프리셋: K-글로우</span></li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>딥 피부 리터치 70 + 화이트닝 + 22개 부위 메이크업</span></li></ul></div></div><p class="note">인물 예시 사진은 AI로 생성한 이미지입니다.</p></section>
+<section class="blk wrap" id="features"><div class="head"><h2>별하늘부터 셀카까지, 앱 하나로</h2><p>사진가에게 필요한 도구가 모두 있고, 모든 단계를 언제든 다시 수정할 수 있습니다.</p></div>
+<div class="grid"><article class="card"><div class="ihead"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><h3>풍경·야경·별하늘</h3></div><dl><div><dt>AI 노이즈 제거</dt><dd>높은 ISO와 야경 노이즈를 한 번에 깔끔하게. 별빛과 디테일은 그대로 지킵니다.</dd></div><div><dt>여러 장 합성</dt><dd>불꽃놀이, 별하늘(별 정렬), HDR(고스트 제거) 세 가지 모드로 휴대폰에서도 데스크톱급 합성을.</dd></div><div><dt>하늘 보정</dt><dd>자동 또는 정밀 하늘 인식: 노을, 붉은 노을, 푸른 하늘, 구름 입체감, 색상 변경을 하늘에만 적용합니다.</dd></div><div><dt>AI 안개 제거·그림자 디테일</dt><dd>뿌연 안개를 걷어 내고, 어두운 영역과 밝은 영역의 계조를 되살립니다.</dd></div><div><dt>카메라 RAW</dt><dd>RAW 파일을 바로 가져와 최대한의 관용도를 활용하세요. 렌즈 보정 프리셋을 저장해 두면 다음부터 자동으로 적용됩니다.</dd></div></dl></article><article class="card"><div class="ihead"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg><h3>전문가급 색 보정</h3></div><dl><div><dt>곡선과 HSL</dt><dd>RGB 및 채널별 곡선, 8색 HSL로 모든 색을 정밀하게 다룹니다.</dd></div><div><dt>부분 보정</dt><dd>하늘, 피사체, 인물 또는 원하는 개체를 탭하거나 브러시로 영역을 칠해, 원하는 부분만 보정하세요.</dd></div><div><dt>16가지 필터</dt><dd>필름, 흑백, 청량한 일본 감성, 홍콩 무드, 시네마틱 등 — 강도도 조절할 수 있습니다.</dd></div><div><dt>비파괴 편집</dt><dd>모든 보정은 켜고 끄기, 수정, 삭제가 가능합니다. 사진을 길게 누르면 언제든 원본과 비교할 수 있습니다.</dd></div><div><dt>프리셋</dt><dd>원터치로 다른 사진에 적용하거나, 편집 전체를 복사해 여러 장에 붙여넣을 수 있습니다.</dd></div></dl></article><article class="card"><div class="ihead"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5a4.5 4.5 0 0 0 7 0M9 9.5h.01M15 9.5h.01"/></svg><h3>인물</h3></div><dl><div><dt>딥 피부 리터치</dt><dd>AI가 잡티는 없애고 피부 결은 그대로 살려, 플라스틱 같은 얼굴이 되지 않습니다.</dd></div><div><dt>뷰티와 잡티 제거</dt><dd>자동 잡티 제거, 다크서클 제거, 화이트닝, 피부 톤 웜/쿨 조절. 여드름도 탭 한 번이면 사라집니다.</dd></div><div><dt>얼굴 성형과 바디</dt><dd>갸름한 얼굴, 큰 눈, 슬림한 코, 턱, 긴 다리, 납작한 배까지 — 실제 윤곽을 따라 조정해 배경이 휘지 않습니다.</dd></div><div><dt>22개 부위 메이크업</dt><dd>파운데이션, 컨투어, 아이섀도, 샤이머, 아이라이너, 속눈썹, 블러셔, 립 컬러, 물광 피부… 헤어 컬러 변경까지.</dd></div><div><dt>단체 사진</dt><dd>얼굴마다, 사람마다 따로 보정할 수 있습니다. 자주 찍는 사람을 등록하면 다음부터 그 사람의 설정이 자동으로 적용됩니다(PRO).</dd></div></dl></article><article class="card"><div class="ihead"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M14.3 3.3 9 12.5M20.6 9.5h-10.6M18.3 18 13 8.8M9.7 20.7 15 11.5M3.4 14.5h10.6M5.7 6 11 15.2"/></svg><h3>빛과 렌즈</h3></div><dl><div><dt>배경 흐림과 보케</dt><dd>대구경 렌즈의 얕은 심도를 재현해 배경의 불빛을 부드럽고 둥근 보케로 바꿉니다. 조리개, 보케 크기, 부드러움, 조리개 모양을 조절할 수 있고 캣아이 보케도 표현합니다.</dd></div><div><dt>빛 갈라짐</dt><dd>야경의 불빛을 4·6·8갈래 빛 갈라짐으로. 실제로 조리개를 조인 것처럼 표현됩니다.</dd></div><div><dt>렌즈 보정</dt><dd>비네팅과 왜곡을 한 번에 보정하고, 초광각 사진도 반듯하게 펴 줍니다.</dd></div><div><dt>개체 지우기</dt><dd>행인, 잡동사니, 전선을 브러시로 칠하면 AI가 배경을 자동으로 채웁니다.</dd></div></dl></article></div></section>
+<section class="wrap" id="privacy"><div class="band"><svg class="ico lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+<div><h2>내 사진은 내 휴대폰 안에만</h2><p>모든 AI 기능은 앱에 내장된 모델로 기기에서 직접 실행됩니다. 계정도, 업로드도, 추적도 없습니다. 비행기 모드에서도 모든 기능을 그대로 쓸 수 있습니다.</p><ul><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>어떤 데이터도 수집하지 않음</li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>인터넷 연결 불필요</li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>앨범 속 원본 사진은 수정하지 않음</li></ul></div></div></section>
+<section class="blk wrap" id="pricing"><div class="head"><h2 class="grad">매달 빠져나가는 구독료, 지겹지 않으세요?</h2><p>Luneki는 한 번 구매로 끝납니다. 모든 편집 기능을 먼저 무료로 써 보고, 마음에 들면 PRO를 한 번만 구매해 평생 사용하세요.</p></div>
+<div class="plans"><div class="plan"><div class="name">무료 버전</div><div class="price">무료</div><ul><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>모든 편집 및 AI 기능</span></li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>최대 1080p로 내보내기</span></li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>내보낸 사진에 워터마크 포함</span></li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>사용자 프리셋 최대 3개</span></li></ul></div><div class="plan pro"><span class="badge">평생 사용</span><div class="name">PRO</div><div class="price">한 번 구매</div><ul><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>원본 해상도로 내보내기</span></li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>워터마크 제거</span></li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>일괄 내보내기</span></li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>프리셋 무제한</span></li><li><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>등록한 인물을 인식해 설정 자동 적용</span></li></ul><p class="fine">구독이 아니므로 매달 결제되지 않습니다. 휴대폰을 바꿔도 같은 Apple ID로 &#x27;구매 복원&#x27;만 하면 됩니다.</p></div></div></section>
+<section class="blk wrap" id="faq" style="padding-top:0"><div class="head"><h2>자주 묻는 질문</h2></div>
+<div class="faq"><details><summary>사진이 업로드되나요?</summary><p>아니요. 모든 처리는 기기에서 이루어지며, 앱에는 업로드 기능 자체가 없습니다.</p></details><details><summary>앨범 속 원본 사진이 바뀌나요?</summary><p>아니요. 편집은 비파괴 방식이며, 내보낼 때 새 사진으로 따로 저장됩니다.</p></details><details><summary>어떤 기기가 필요한가요?</summary><p>iPhone과 iPad에서 사용할 수 있습니다. AI 기능은 최신 기종일수록 더 빠릅니다.</p></details><details><summary>어떤 형식을 지원하나요?</summary><p>앨범 사진과 카메라 RAW 파일을 가져올 수 있고, JPEG, HEIC, PNG, TIFF로 내보낼 수 있으며 EXIF와 색상 프로파일도 유지할 수 있습니다.</p></details><details><summary>PRO는 구독인가요?</summary><p>아니요. PRO는 한 번 구매하면 평생 사용할 수 있습니다.</p></details></div><p class="more"><a href="/support?lang=ko">더 궁금한 점은 지원 페이지에서 확인하세요 →</a></p></section>
+<section class="wrap"><div class="final"><img src="/assets/harbor-after.jpg" alt="" loading="lazy">
+<div class="in"><h2>오늘 밤 찍은 별하늘, 오늘 밤에 완성하세요.</h2><a class="btn pri" href="https://apps.apple.com/app/id6802241667"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8-.1 0-2.5-1-2.5-3.9zM14 5.3c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z" fill="currentColor" stroke="none"/></svg>App Store에서 다운로드</a></div></div></section>
+</main>
+<footer class="foot"><div class="wrap row">
+<div><strong style="color:var(--fg)">Luneki</strong> · 휴대폰 하나로 끝내는 사진 보정</div>
+<nav><a href="/ko/">홈</a><a href="/ko/guide/">사용 가이드</a><a href="/support?lang=ko">지원</a>
+<a href="/privacy?lang=ko">개인정보</a><a href="mailto:zhe0712@gmail.com">문의하기</a></nav>
+</div></footer>
+<script>
+document.querySelectorAll('.ba input').forEach(function(r){
+  var box=r.closest('.ba');
+  function set(){box.style.setProperty('--p',r.value+'%');}
+  r.addEventListener('input',set);set();
+});
+document.querySelectorAll('select[data-nav]').forEach(function(s){
+  s.addEventListener('change',function(){location.href=s.value;});
+});
+</script>
+</body>
+</html>
