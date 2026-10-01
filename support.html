@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Luneki — Support / 支援</title>
+<link rel="icon" href="/icon.png">
+<script>document.documentElement.className='js';</script>
+<style>
+:root{--bg:#fff;--fg:#1a1a1a;--muted:#666;--line:#e5e5e5;--accent:#4b4fd8}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#121318;--fg:#e8e8ee;--muted:#9a9aa6;--line:#2a2b33;--accent:#9fa4ff}
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC",
+  "Noto Sans TC","Hiragino Sans",sans-serif;-webkit-text-size-adjust:100%}
+main{max-width:42rem;margin:0 auto;padding:3rem 1.25rem 5rem}
+h1{font-size:1.75rem;line-height:1.3;margin:0 0 .25rem;text-wrap:balance}
+h2{font-size:1.1rem;margin:2.25rem 0 .5rem;padding-top:1.25rem;border-top:1px solid var(--line)}
+a{color:var(--accent)}
+.updated{color:var(--muted);font-size:.9rem;margin:0 0 2rem}
+.lede{font-size:1.1rem}
+footer{margin-top:4rem;padding-top:1.5rem;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+.js [data-lang]{display:none}
+.js [data-lang].on{display:block}
+.langs{display:flex;flex-wrap:wrap;gap:.4rem;margin:0 0 2.5rem;padding:0;list-style:none}
+:root:not(.js) .langs{display:none}
+.langs button{font:inherit;font-size:.85rem;line-height:1;padding:.45rem .7rem;border:1px solid var(--line);
+  border-radius:999px;background:transparent;color:var(--muted);cursor:pointer}
+.langs button[aria-current="true"]{border-color:var(--accent);color:var(--accent);font-weight:600}
+.langs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.links{display:flex;gap:1rem;flex-wrap:wrap;padding:0;list-style:none}
+</style>
+</head>
+<body>
+<main>
+<ul class="langs"><li><button type="button" data-go="zh-Hant">繁體中文</button></li><li><button type="button" data-go="en">English</button></li></ul>
+<section data-lang="zh-Hant" lang="zh-Hant">
+<h1>Luneki 月輝 · 支援</h1>
+<p class="lede">有問題、建議或發現 bug,請直接來信:<a href="mailto:zhe0712@gmail.com">zhe0712@gmail.com</a></p>
+<h2>我的照片會被上傳嗎?</h2>
+<p>不會。所有編輯與 AI 功能(修膚、降噪、去霧、物件消除、天空與人像偵測)都在你的裝置上完成,App 沒有任何上傳端點,開飛航模式也能完整使用。</p>
+<h2>會改到相簿裡的原始照片嗎?</h2>
+<p>不會。編輯是非破壞性的,輸出時另存一張新照片到相簿。</p>
+<h2>免費版與 PRO 差在哪?</h2>
+<p>免費版可以使用所有編輯功能;輸出上限 1080p 並帶浮水印、自訂設定集最多 3 組。PRO 解鎖原始解析度輸出、批次輸出、移除浮水印、無限設定集,以及認出已註冊的人並自動套用設定。</p>
+<h2>換手機後怎麼恢復 PRO?</h2>
+<p>使用同一個 Apple ID,在 App 內「設定 → 回復購買」即可。</p>
+<h2>如何取消訂閱?</h2>
+<p>在 iPhone「設定 → 你的名字 → 訂閱」中管理或取消,也可以從 App 內「設定 → 管理訂閱」進入。</p>
+<h2>退款</h2>
+<p>購買由 Apple 處理,退款請至 <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a> 申請。</p>
+<ul class="links"><li><a href="/privacy">隱私權政策</a></li></ul>
+</section>
+<section data-lang="en" lang="en">
+<h1>Luneki · Support</h1>
+<p class="lede">Questions, feedback or bug reports: <a href="mailto:zhe0712@gmail.com">zhe0712@gmail.com</a></p>
+<h2>Are my photos uploaded?</h2>
+<p>No. Every edit and AI feature (skin retouching, noise reduction, dehaze, object removal, sky and person detection) runs on your device. The app has no upload endpoint and works fully in Airplane Mode.</p>
+<h2>Does it change the originals in my library?</h2>
+<p>No. Editing is non-destructive; exporting saves a new photo to your library.</p>
+<h2>What's the difference between Free and PRO?</h2>
+<p>Free includes every editing tool; exports are limited to 1080p with a watermark, and you can save up to 3 custom presets. PRO unlocks full-resolution export, batch export, no watermark, unlimited presets, and recognizing registered people to apply their settings automatically.</p>
+<h2>How do I restore PRO on a new device?</h2>
+<p>Sign in with the same Apple ID and tap Settings → Restore Purchases in the app.</p>
+<h2>How do I cancel my subscription?</h2>
+<p>Go to iPhone Settings → your name → Subscriptions, or Settings → Manage Subscription in the app.</p>
+<h2>Refunds</h2>
+<p>Purchases are handled by Apple. Request a refund at <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.</p>
+<ul class="links"><li><a href="/privacy">Privacy Policy</a></li></ul>
+</section>
+<footer>Luneki · 月輝　|　<a href="mailto:zhe0712@gmail.com">zhe0712@gmail.com</a></footer>
+</main>
+<script>
+(function(){
+  var langs=["zh-Hant", "en"];
+  function pick(){
+    var q=(location.search.match(/[?&]lang=([\w-]+)/)||[])[1]||location.hash.slice(1);
+    if(q&&langs.indexOf(q)>=0)return q;
+    var list=navigator.languages||[navigator.language||'en'];
+    for(var i=0;i<list.length;i++){
+      var t=list[i];
+      if(/^zh/i.test(t)&&langs.indexOf('zh-Hant')>=0&&!/hans|-cn|-sg|-my/i.test(t))return 'zh-Hant';
+      var base=t.split('-')[0].toLowerCase();
+      if(langs.indexOf(base)>=0)return base;
+    }
+    return 'en';
+  }
+  function show(code){
+    var s=document.querySelectorAll('[data-lang]');
+    for(var i=0;i<s.length;i++)s[i].classList.toggle('on',s[i].getAttribute('data-lang')===code);
+    var b=document.querySelectorAll('.langs button');
+    for(var j=0;j<b.length;j++)b[j].setAttribute('aria-current',b[j].getAttribute('data-go')===code?'true':'false');
+    document.documentElement.setAttribute('lang',code);
+  }
+  show(pick());
+  document.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('.langs button');if(b)show(b.getAttribute('data-go'));
+  });
+})();
+</script>
+</body>
+</html>
